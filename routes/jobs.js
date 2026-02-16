@@ -7,17 +7,14 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const jobs = await Job.find().sort({ createdAt: -1 });
-
-    // 🔹 Add logging
-    console.log("🔹 Jobs fetched from DB:", jobs);
-    console.log("🔹 Number of jobs:", jobs.length);
-
+    console.log("🔹 Jobs fetched from MongoDB:", jobs);
     res.json(jobs);
   } catch (err) {
-    console.error("❌ Error fetching jobs:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("❌ Error fetching jobs from DB:", err);
+    res.status(500).json({ error: "Failed to fetch jobs" });
   }
 });
+
 
 // Create job
 router.post("/", async (req, res) => {
