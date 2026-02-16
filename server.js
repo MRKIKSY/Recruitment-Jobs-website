@@ -16,18 +16,10 @@ const allowedOrigins = [
   "https://britishirishsocialworkagency.co.uk",     // Root domain (optional)
 ];
 
+
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // Allow requests from Postman / server-side
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `CORS policy: The origin ${origin} is not allowed`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allow all CRUD methods
-  allowedHeaders: ["Content-Type", "Authorization"],             // Headers your frontend sends
-  credentials: true,                                              // Needed for cookies/auth
+  origin: ["https://britishirishsocialworkagency.co.uk", "https://www.britishirishsocialworkagency.co.uk"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
 // ===== MIDDLEWARE =====
